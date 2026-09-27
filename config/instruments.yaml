@@ -1,0 +1,32 @@
+# Instrument configuration — parameters actually used in backtesting this session,
+# not placeholders. Point sizes inferred from decimal precision in each
+# instrument's real MT5 export.
+
+EURUSD:
+  point_size: 0.00001
+  base_risk_pct: 0.25
+  regime_role: risk_sizing + directional entry (CPI m/m surprise — validated)
+  news_currencies: [USD, EUR]  # EUR watched here for ECB coverage
+
+XAUUSD:
+  point_size: 0.01
+  base_risk_pct: 0.25
+  regime_role: risk_sizing only  # directional CPI-surprise rejected (unstable across data sources)
+  news_currencies: [USD]
+
+BTCUSD:
+  point_size: 0.01
+  base_risk_pct: 0.25
+  regime_role: risk_sizing only  # five directional hypotheses tested, all rejected or null
+  news_currencies: [USD]
+
+regime_thresholds:
+  elevated_percentile: 75.0
+  spike_percentile: 95.0
+  fast_vol_window: 20
+  slow_vol_window: 100
+  atr_period: 14
+  atr_baseline_window: 100
+
+risk:
+  max_drawdown_pct: 10.0  # hard kill-switch, no auto-recovery
